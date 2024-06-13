@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN PAGE</title>
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+    <main class="form-signin">
+        <form class="custom-form" method="post" action="login_action.php">
+            <img src="image/logo.png" alt="Logo" class="mb-4" width="100">
+            <h1 class="h3 mb-3 fw-normal">ADMIN LOGIN</h1>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" id="rememberMe"> Remember me
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">เข้าสู่ระบบ</button>
+            <a href="register.html" class="w-100 btn btn-lg btn-secondary mt-3">ลงทะเบียน</a>
+        </form>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem("username") && localStorage.getItem("password")) {
+                document.getElementById("floatingInput").value = localStorage.getItem("username");
+                document.getElementById("floatingPassword").value = localStorage.getItem("password");
+                document.getElementById("rememberMe").checked = true;
+            }
+
+            document.querySelector("form").addEventListener("submit", function() {
+                if (document.getElementById("rememberMe").checked) {
+                    localStorage.setItem("username", document.getElementById("floatingInput").value);
+                    localStorage.setItem("password", document.getElementById("floatingPassword").value);
+                } else {
+                    localStorage.removeItem("username");
+                    localStorage.removeItem("password");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
