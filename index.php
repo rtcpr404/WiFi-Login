@@ -44,6 +44,10 @@ $user = $_SESSION['user_login'];
         .btn-container .btn:last-child {
             margin-top: 10px;
         }
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -51,14 +55,14 @@ $user = $_SESSION['user_login'];
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
-                <img src="image/logo.png" alt="Logo" width="400"><br>
+                <img src="image/logo.png" alt="Logo" class="logo mb-4"><br>
                 <h1>สวัสดีคุณ : <?php echo $user['fullname']; ?> <br> ระดับผู้ใช้ของคุณ : <?php echo $user['level']; ?> </h1>
             </div>
             <div class="btn-container mt-3">
                 <?php if ($user['level'] == 'administrator') { // แสดงลิงค์ไปยังหน้าผู้ดูแลระบบเมื่อผู้ใช้เป็นแอดมิน ?>
                     <a href="admin.php" class="btn btn-lg btn-warning">หน้าสำหรับผู้ดูแลระบบ</a>
                 <?php } ?>
-                <a href="logout_action.php" class="btn btn-lg btn-danger ">ออกจากระบบ</a>
+                <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
             </div>
         </div>
     </div>

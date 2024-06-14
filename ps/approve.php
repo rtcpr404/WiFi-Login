@@ -35,15 +35,52 @@ $email = $_POST["u_email"];
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/style.css" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="image/icon.png">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-container h1 {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn-success, .btn-danger {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+        }
+        @media (max-width: 576px) {
+            .btn-lg {
+                padding: 10px 16px;
+                font-size: 18px;
+                line-height: 1.3333333;
+                border-radius: 6px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="bg-light p-5 rounded mt-3">
-            <h1>หน้าสำหรับผู้ดูแลระบบ</h1>
-            <div class="mt-5">
-                <a href="../admin.php" class="btn btn-lg btn-success">ย้อนกลับ</a>
-                <a href="../logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
+            <div class="header-container">
+                <a href="../admin.php" class="btn btn-lg btn-success btn-block">กลับหน้าหลัก</a>
+                <h2>Administrator Page</h2>
+                <a href="logout_action.php" class="btn btn-lg btn-danger btn-block">ออกจากระบบ</a>
             </div>
         </div>
     </div>
@@ -103,7 +140,7 @@ $objCon = mysqli_query($objCon, $strSQL) or die(mysqli_error($objCon));
 <html lang="en">
 
 
-<main class="form-signin">
+<main class="form-signin shadow-lg">
         <form method="post" action="mail.php">
             <h1 class="h3 mb-3 fw-normal">Sendmail</h1>
             <div class="form-floating">

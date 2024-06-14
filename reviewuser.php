@@ -12,11 +12,11 @@ if ($user['level'] != 'administrator') {
 }
 
 if($_GET["u_username"]==''){ 
-	echo "<script type='text/javascript'>"; 
-	echo "alert('Error Contact Admin !!');"; 
-	echo "window.location = './admin.php'; "; 
-	echo "</script>"; 
-	}
+    echo "<script type='text/javascript'>"; 
+    echo "alert('Error Contact Admin !!');"; 
+    echo "window.location = './admin.php'; "; 
+    echo "</script>"; 
+    }
 $username = $_GET["u_username"];
 
 include_once("./function.php");
@@ -41,7 +41,7 @@ include_once("./function.php");
             justify-content: space-between;
             align-items: center;
         }
-        .header-container h1 {
+        .header-container h2 {
             flex-grow: 1;
             text-align: center;
             margin: 0;
@@ -62,7 +62,7 @@ include_once("./function.php");
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
         }
         .img-container {
-        text-align: center;
+            text-align: center;
         }
         .img-container img {
             display: block;
@@ -71,20 +71,28 @@ include_once("./function.php");
         .page-title {
             text-align: center;
         }
+        @media (max-width: 576px) {
+            .btn-lg {
+                padding: 10px 16px;
+                font-size: 18px;
+                line-height: 1.3333333;
+                border-radius: 6px;
+            }
+        }
     </style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="bg-light p-5 rounded mt-3 shadow-lg">
-                <div class="header-container">
-                    <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                    <h2>Administrator Page</h2>
-                    <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
-                </div>
-            </div>
+<div class="container">
+    <div class="bg-light p-5 rounded mt-3 shadow-lg">
+        <div class="header-container">
+            <a href="index.php" class="btn btn-lg btn-success btn-block">กลับหน้าหลัก</a>
+            <h2>Administrator Page</h2>
+            <a href="logout_action.php" class="btn btn-lg btn-danger btn-block">ออกจากระบบ</a>
+        </div>
     </div>
+</div>
 <?php
     $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
     $strSQL = "SELECT * FROM user where u_username = '$username' ";
@@ -183,8 +191,8 @@ include_once("./function.php");
                         <option value="administrator">ผู้ดูแลระบบ</option>
                     </select>
                 </div> -->
-                <button class="w-100 btn btn-lg btn-primary shadow-lg" type="submit">ลงทะเบียน</button>
-                <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg">ย้อนกลับ</a>
+                <button class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
+                <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ย้อนกลับ</a>
             </form>
         </div> 
     </div>

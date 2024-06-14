@@ -10,36 +10,50 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/style.css" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="image/icon.png">
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container text-center">
-                <img src="image/logo.png" alt="Logo" class="mb-4" width="400">
+                <a href="login.html">
+                    <img src="image/logo.png" alt="Logo" class="mb-4">
+                </a>
             </div>
         </div>
-        <div class="bg-light p-5 rounded mt-3">
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <h1>ลงทะเบียน</h1>
             <form id="forme" method="post" action="register_action.php" enctype="multipart/form-data">
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_th" class="form-label">ชื่อ</label>
-                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ" required>
+                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ"
+                            required>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_surename_th" class="form-label">สกุล</label>
-                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th" placeholder="สกุล" required>
+                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th"
+                            placeholder="สกุล" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_en" class="form-label">ชื่อ ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name" required>
+                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name"
+                            required>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_surename_en" class="form-label">สกุล ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en" placeholder="Surename" required>
+                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en"
+                            placeholder="Surename" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -49,7 +63,8 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_position" class="form-label">ตำแหน่ง</label>
-                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง" required>
+                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง"
+                            required>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -58,7 +73,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="u_username" class="form-label">Username</label>
-                    <input type="text" readonly class="form-control" id="u_username" name="u_username" value="" placeholder="" required>
+                    <input type="text" readonly class="form-control" id="u_username" name="u_username" value=""
+                        placeholder="" required>
                 </div>
                 <div class="mb-3">
                     <label for="u_idcard" class="form-label">เลขบัตรราชการ</label>
@@ -66,24 +82,27 @@
                 </div>
                 <div class="mb-3">
                     <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Password"
+                        required>
                 </div>
                 <div class="mb-3">
                     <label for="u_password_confirm" class="form-label">confirm-Password</label>
-                    <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm" placeholder="Confirm -Password" required>
+                    <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm"
+                        placeholder="Confirm -Password" required>
                 </div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_level" name="u_level" value="user">
                 </div>
                 <div class="mb-3">
                     <label for="u_img" class="form-label">Upload รูปบัตรราชการ</label>
-                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ" required>
+                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ"
+                        required>
                 </div>
                 <div class="mb-3 preview-container">
                     <img id="preview-img" src="#" alt="Preview Image" style="max-width: 200px; display: none;">
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">ลงทะเบียน</button>
-                <a href="login.html" class="w-100 btn btn-lg btn-danger mt-3">ยกเลิก</a>
+                <button class="w-100 btn btn-lg btn-primary shadow-lg" type="submit">ลงทะเบียน</button>
+                <a href="login.html" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg">ยกเลิก</a>
             </form>
         </div>
     </div>
@@ -111,19 +130,19 @@
         const fileInput = document.getElementById('u_img');
         const previewImg = document.getElementById('preview-img');
 
-        fileInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.addEventListener('load', function() {
-            previewImg.src = reader.result;
-            previewImg.style.display = 'block';
-            });
-            reader.readAsDataURL(file);
-        } else {
-            previewImg.src = '#';
-            previewImg.style.display = 'none';
-        }
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', function () {
+                    previewImg.src = reader.result;
+                    previewImg.style.display = 'block';
+                });
+                reader.readAsDataURL(file);
+            } else {
+                previewImg.src = '#';
+                previewImg.style.display = 'none';
+            }
         });
 
         //  เช็ครหัสผ่านตรงกันป่าว
@@ -131,11 +150,11 @@
         const confirmPasswordInput = document.getElementById('u_password_confirm');
 
         function checkPasswordMatch() {
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            confirmPasswordInput.setCustomValidity('รหัสผ่านไม่ตรงกัน');
-        } else {
-            confirmPasswordInput.setCustomValidity('');
-        }
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.setCustomValidity('รหัสผ่านไม่ตรงกัน');
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+            }
         }
 
         passwordInput.addEventListener('input', checkPasswordMatch);

@@ -16,11 +16,9 @@ if ($user['level'] != 'administrator') {
 }
 
 include_once("./function.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +26,8 @@ include_once("./function.php");
     <title>หน้าผู้ดูแลระบบ</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/style.css" rel="stylesheet">
     <!-- Icon -->
@@ -37,8 +37,9 @@ include_once("./function.php");
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
-        .header-container h1 {
+        .header-container h2 {
             flex-grow: 1;
             text-align: center;
             margin: 0;
@@ -56,12 +57,35 @@ include_once("./function.php");
             background-color: #f2f2f2;
         }
         .btn-success, .btn-danger {
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+        }
+        .view-icon {
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        .view-icon:hover {
+            color: #0056b3;
+        }
+        td a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .user-info-col {
+            width: 1%;
+            white-space: nowrap;
+        }
+        @media (max-width: 576px) {
+            .header-container a {
+                margin-bottom: 10px;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
-
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
@@ -85,7 +109,7 @@ include_once("./function.php");
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
                         <th>Username</th>
-                        <th>ดูข้อมูลผู้ใช้</th>
+                        <th class="user-info-col">ดูข้อมูลผู้ใช้</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,7 +119,7 @@ include_once("./function.php");
                         echo "<td>" . $row["u_name_th"] . "</td>";
                         echo "<td>" . $row["u_surename_th"] . "</td>";
                         echo "<td>" . $row["u_username"] . "</td>";
-                        echo "<td><a href='reviewuser.php?u_username=" . $row["u_username"] . "'>ดูข้อมูล</a></td>";
+                        echo "<td class='user-info-col'><a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a></td>";
                         echo "</tr>";
                     }
                     ?>
@@ -108,5 +132,4 @@ include_once("./function.php");
         ?>
     </div>
 </body>
-
 </html>

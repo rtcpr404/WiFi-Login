@@ -12,21 +12,25 @@
     <link href="./css/style.css" rel="stylesheet">
     <!-- Icon -->
     <link rel="icon" type="image/png" href="image/icon.png">
+    <style>
+        .logo {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body class="text-center">
-
     <main class="form-signin">
         <form class="custom-form" method="post" action="login_action.php">
-            <img src="image/logo.png" alt="Logo" class="mb-4" width="100">
+            <img src="image/logo.png" alt="Logo" class="mb-4 logo">
             <h1 class="h3 mb-3 fw-normal">ADMIN LOGIN</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                    placeholder="Password">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="checkbox-container mb-3">
