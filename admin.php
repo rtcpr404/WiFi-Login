@@ -91,7 +91,7 @@ include_once("./function.php");
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
                 <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                <h2>Administrator Page</h2>
+                <h2>Administrator</h2>
                 <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
             </div>
         </div>
