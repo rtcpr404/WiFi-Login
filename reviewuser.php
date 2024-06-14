@@ -33,18 +33,57 @@ include_once("./function.php");
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./css/style.css" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="icon" type="image/png" href="image/icon.png">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-container h1 {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn-success, .btn-danger {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+        }
+        .img-container {
+        text-align: center;
+        }
+        .img-container img {
+            display: block;
+            margin: 0 auto;
+        }
+        .page-title {
+            text-align: center;
+        }
+    </style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="bg-light p-5 rounded mt-3">
-            <h1>หน้าสำหรับผู้ดูแลระบบ</h1>
-            <div class="mt-5">
-                <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
+                <div class="header-container">
+                    <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
+                    <h2>Administrator Page</h2>
+                    <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+                </div>
             </div>
-        </div>
     </div>
 <?php
     $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
@@ -84,8 +123,8 @@ include_once("./function.php");
 ?>
 
 <div class="container">
-        <div class="bg-light p-5 rounded mt-3">
-            <h1>รายละเอียดผู้ลงทะเบียน</h1>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
+           <h1 class="page-title">รายละเอียดผู้ลงทะเบียน</h1><br>
             <form id="forme" method="post" action="/ps/approve.php">
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -129,7 +168,7 @@ include_once("./function.php");
                     <label for="u_img" class="form-label">รูปบัตรราชการ</label>
                     <input type="text" readonly class="form-control" id="u_img" name="u_img" value="<?php echo $idcard; ?>" required>
                 </div>
-                <div><?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid" alt="Responsive image"/>';?></div>
+                <div class="mb-3 img-container "><?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg" alt="Responsive image"/>';?></div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_password" name="u_password" value="<?php echo $passwd; ?>" required>
                 </div>
@@ -144,8 +183,8 @@ include_once("./function.php");
                         <option value="administrator">ผู้ดูแลระบบ</option>
                     </select>
                 </div> -->
-                <button class="w-100 btn btn-lg btn-primary" type="submit">ลงทะเบียน</button>
-                <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3">ยกเลิก</a>
+                <button class="w-100 btn btn-lg btn-primary shadow-lg" type="submit">ลงทะเบียน</button>
+                <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg">ย้อนกลับ</a>
             </form>
         </div> 
     </div>

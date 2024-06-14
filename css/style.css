@@ -75,19 +75,49 @@ body {
 }
 
 .password-container {
-    position: relative;
+  position: relative;
 }
 
 .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.toggle-password img {
+  width: auto;
+  height: auto;
 }
 
 .checkbox {
   text-align: right;
   font-size: 14px;
   /* margin-top: 0px; */
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.checkbox-container label {
+  margin: 0;
+}
+
+.btn-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-shadow:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.header-container {
+  text-align: center;
 }
