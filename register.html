@@ -35,25 +35,21 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_th" class="form-label">ชื่อ</label>
-                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ"
-                            required>
+                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ" required>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_surename_th" class="form-label">สกุล</label>
-                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th"
-                            placeholder="สกุล" required>
+                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th" placeholder="สกุล" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_en" class="form-label">ชื่อ ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name"
-                            required>
+                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name" required>
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_surename_en" class="form-label">สกุล ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en"
-                            placeholder="Surename" required>
+                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en" placeholder="Surename" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -63,9 +59,12 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_position" class="form-label">ตำแหน่ง</label>
-                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง"
-                            required>
+                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง" required>
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="u_idcard" class="form-label">เลขบัตรราชการ</label>
+                    <input type="text" class="form-control" id="u_idcard" name="u_idcard" placeholder="Idcard" required>
                 </div>
                 <div class="mb-3">
                     <label for="u_email" class="form-label">E-mail</label>
@@ -73,30 +72,22 @@
                 </div>
                 <div class="mb-3">
                     <label for="u_username" class="form-label">Username</label>
-                    <input type="text" readonly class="form-control" id="u_username" name="u_username" value=""
-                        placeholder="" required>
-                </div>
-                <div class="mb-3">
-                    <label for="u_idcard" class="form-label">เลขบัตรราชการ</label>
-                    <input type="text" class="form-control" id="u_idcard" name="u_idcard" placeholder="Idcard" required>
+                    <input type="text" readonly class="form-control" id="u_username" name="u_username" value="" placeholder="" required>
                 </div>
                 <div class="mb-3">
                     <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Password"
-                        required>
+                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Password" required>
                 </div>
                 <div class="mb-3">
                     <label for="u_password_confirm" class="form-label">confirm-Password</label>
-                    <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm"
-                        placeholder="Confirm -Password" required>
+                    <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm" placeholder="Confirm -Password" required>
                 </div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_level" name="u_level" value="user">
                 </div>
                 <div class="mb-3">
                     <label for="u_img" class="form-label">Upload รูปบัตรราชการ</label>
-                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ"
-                        required>
+                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ" required>
                 </div>
                 <div class="mb-3 preview-container">
                     <img id="preview-img" src="#" alt="Preview Image" style="max-width: 200px; display: none;">
@@ -110,22 +101,71 @@
     <p id="result"></p>
 
     <script>
-        const name = document.getElementById('u_name_en');
-        const surename = document.getElementById('u_surename_en');
+        const name_th = document.getElementById('u_name_th');
+        const surename_th = document.getElementById('u_surename_th');
+        const name_en = document.getElementById('u_name_en');
+        const surename_en = document.getElementById('u_surename_en');
         const u_username = document.getElementById('u_username');
+        const idcard = document.getElementById('u_idcard');
 
         function generateUsername() {
-            const str1 = name.value;
-            const str2 = surename.value;
-            const str2trim = str2.substring(0, 2);//เอาสองตัวเเรกของlastname
+            const str1 = name_en.value;
+            const str2 = surename_en.value;
+            const str2trim = str2.substring(0, 2);
             const concatenatedString = str1 + "." + str2trim;
             const concatenatedStringlowercase = concatenatedString.toLowerCase();
 
             u_username.value = concatenatedStringlowercase;
         }
-        //  เเสดงรูปพรีวิวที่เลือก
-        name.addEventListener('input', generateUsername);
-        surename.addEventListener('input', generateUsername);
+
+        function validateThaiInput(input) {
+            const regex = /^[ก-๏\s]+$/;
+            if (!regex.test(input.value)) {
+                input.setCustomValidity('กรุณากรอกเฉพาะตัวอักษรภาษาไทย');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+
+        function validateEnglishInput(input) {
+            const regex = /^[A-Za-z\s]*$/;
+            if (!regex.test(input.value)) {
+                input.setCustomValidity('กรุณากรอกเฉพาะตัวอักษรภาษาอังกฤษ');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+
+        function validateNumericInput(input) {
+            const regex = /^[0-9]*$/;
+            if (!regex.test(input.value)) {
+                input.setCustomValidity('กรุณากรอกเฉพาะตัวเลข');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+
+        name_th.addEventListener('input', () => {
+            validateThaiInput(name_th);
+        });
+
+        surename_th.addEventListener('input', () => {
+            validateThaiInput(surename_th);
+        });
+
+        name_en.addEventListener('input', () => {
+            generateUsername();
+            validateEnglishInput(name_en);
+        });
+
+        surename_en.addEventListener('input', () => {
+            generateUsername();
+            validateEnglishInput(surename_en);
+        });
+
+        idcard.addEventListener('input', () => {
+            validateNumericInput(idcard);
+        });
 
         const fileInput = document.getElementById('u_img');
         const previewImg = document.getElementById('preview-img');
@@ -145,7 +185,6 @@
             }
         });
 
-        //  เช็ครหัสผ่านตรงกันป่าว
         const passwordInput = document.getElementById('u_password');
         const confirmPasswordInput = document.getElementById('u_password_confirm');
 

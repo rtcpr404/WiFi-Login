@@ -97,9 +97,6 @@ include_once("./function.php");
     $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
     $strSQL = "SELECT * FROM user where u_username = '$username' ";
     $result = mysqli_query($objCon, $strSQL); 
-    //echo "<table border='1' align='center' width='800'>";
-    //หัวข้อตาราง
-    //echo "<tr align='center' bgcolor='#CCCCCC'><td>ชื่อ</td><td>นามสกุล</td><td>username</td><td>Password</td><td>Viewuser</td></tr>";
     while($row = mysqli_fetch_array($result)) { 
      $name_th = $row["u_name_th"];  
      $surename_th = $row["u_surename_th"];
@@ -112,21 +109,7 @@ include_once("./function.php");
      $position = $row["u_position"];
      $passwd = base64_decode($row["u_password"]);
      $img = $row["u_img"];
-     
-     // echo "<tr>";
-     // echo "<td align='center'>" .$name_th."</td> "; 
-     // echo "<td align='center'>" .$row["u_surename_th"] .  "</td> ";  
-     // echo "<td align='center'>" .$row["u_username"] .  "</td> ";
-     // echo "<td align='center'>" .$passwd."</td> "; 
-      //แก้ไขข้อมูล
-     // echo "<td align='center'><a href='./ps/approve.php?u_username=$row[u_username]'>approve</a></td> ";
-      
-      //ลบข้อมูล
-     // echo "<td><a href='UserDelete.php?ID=$row[0]' onclick=\"return confirm('Do you want to delete this record? !!!')\">del</a></td> ";
-     // echo "</tr>";
     }
-   // echo "</table>";
-    //5. close connection
     mysqli_close($objCon);
 ?>
 
@@ -174,23 +157,11 @@ include_once("./function.php");
                 </div>
                 <div class="mb-3">
                     <label for="u_img" class="form-label">รูปบัตรราชการ</label>
-                    <input type="text" readonly class="form-control" id="u_img" name="u_img" value="<?php echo $idcard; ?>" required>
                 </div>
                 <div class="mb-3 img-container "><?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg" alt="Responsive image"/>';?></div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_password" name="u_password" value="<?php echo $passwd; ?>" required>
                 </div>
-                <!--<div class="mb-3">
-                    <label for="uu_img" class="form-label">Upload รูปบัตรราชการ</label>
-                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ" required>
-                </div> -->
-                <!-- <div class="mb-3">
-                    <label for="u_level" class="form-label">Level</label>
-                    <select id="u_level" name="u_level" class="form-select">
-                        <option value="user">ผู้ใช้ทั่วไป</option>
-                        <option value="administrator">ผู้ดูแลระบบ</option>
-                    </select>
-                </div> -->
                 <button class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
                 <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ย้อนกลับ</a>
             </form>
@@ -200,3 +171,4 @@ include_once("./function.php");
 </body>
 
 </html>
+
