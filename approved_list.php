@@ -9,12 +9,6 @@ if (!isset($_SESSION['user_login'])) {
 
 $user = $_SESSION['user_login'];
 
-// ตรวจสอบสิทธิ์ผู้ดูแลระบบ
-if ($user['level'] != 'administrator') {
-    echo '<script>alert("สำหรับผู้ดูแลระบบเท่านั้น");window.location="index.php";</script>';
-    exit;
-}
-
 include_once("./function.php");
 ?>
 <!DOCTYPE html>
@@ -23,7 +17,7 @@ include_once("./function.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าผู้ดูแลระบบ</title>
+    <title>User Approved List</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -56,31 +50,12 @@ include_once("./function.php");
         th {
             background-color: #f2f2f2;
         }
-        .btn-success, .btn-danger {
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
-        }
         .view-icon {
             color: #007bff;
             transition: color 0.3s ease;
         }
         .view-icon:hover {
             color: #0056b3;
-        }
-        td a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        .user-info-col {
-            width: 1%;
-            white-space: nowrap;
-        }
-        .approve-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
         }
         @media (max-width: 576px) {
             .header-container a {
@@ -96,20 +71,20 @@ include_once("./function.php");
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
-                <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                <h2>Not Approved List</h2>
+                <a href="admin.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
+                <h2>Approved List</h2>
                 <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
             </div>
             <div class="text-center mt-3">
-                <a href="approved_list.php" class="btn btn-primary">User Approved List</a>
+                <a href="admin.php" class="btn btn-primary">User Not Approved List</a>
             </div>
         </div>
         <?php    
         $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
-        $strSQL = "SELECT * FROM user WHERE u_approved = 0";
+        $strSQL = "SELECT * FROM user WHERE u_approved = 1";
         $result = mysqli_query($objCon, $strSQL); 
         ?>
-        
+
         <div class="table-responsive mt-5">
             <table class="table table-bordered table-striped">
                 <thead class="thead-light">
@@ -117,7 +92,7 @@ include_once("./function.php");
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
                         <th>Username</th>
-                        <th class="user-info-col">ดูข้อมูลผู้ใช้</th>
+                        <th>การดำเนินการ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,7 +102,9 @@ include_once("./function.php");
                         echo "<td>" . $row["u_name_th"] . "</td>";
                         echo "<td>" . $row["u_surename_th"] . "</td>";
                         echo "<td>" . $row["u_username"] . "</td>";
-                        echo "<td class='user-info-col'><a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a></td>";
+                        echo "<td>";
+                        echo "<a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>

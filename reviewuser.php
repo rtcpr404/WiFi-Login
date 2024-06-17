@@ -114,7 +114,7 @@ include_once("./function.php");
 <div class="container">
     <div class="bg-light p-5 rounded mt-3 shadow-lg">
         <div class="header-container">
-            <a href="index.php" class="btn btn-lg btn-success btn-block">กลับหน้าหลัก</a>
+            <a href="admin.php" class="btn btn-lg btn-success btn-block">ไปยัง Approved</a>
             <h2>Administrator Page</h2>
             <a href="logout_action.php" class="btn btn-lg btn-danger btn-block">ออกจากระบบ</a>
         </div>
@@ -191,6 +191,7 @@ include_once("./function.php");
                 </div>
                 <button onclick="return confirmRegistration();" class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
                 <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
+                <a href="edit_user.php?u_username=<?php echo $username; ?>" class="btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a>
                 <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ย้อนกลับ</a>
             </form>
         </div> 
