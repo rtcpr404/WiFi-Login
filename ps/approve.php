@@ -85,61 +85,30 @@ $email = $_POST["u_email"];
         </div>
     </div>
 </html>
-
-
 <?php
 
 $objCon = connectDB();
 $strSQL = "UPDATE user SET 
-            u_approved= '1' 
-			WHERE u_username='$username' ";
-$objCon = mysqli_query($objCon, $strSQL) or die(mysqli_error($objCon));
-
-//หัวข้อตาราง
-
-//while($row = mysqli_fetch_array($result)) { 
- //$name = $row["u_username"];  
- //$pass = base64_decode($row["u_password"]);
-//}
-//5. close connection
-//mysqli_close($objCon);
-
-
-	/*
-	$text = $_POST['text'];
-	$output = wordwrap($text, 60, "<br>");
-	echo $output; 
-	*/
-	  //  $name = isset($_POST['name']) ? $_POST['name'] : ''; 
-		
-
-	
-	    echo "<div class='container'>";
-		echo "<div class='bg-light p-5 rounded mt-3'>";
-		//echo "<div id='phpBox' class='phpData' style='background-color: coral; color: white'>";
-	    $adminuserName = shell_exec('powershell -ExecutionPolicy Unrestricted -Command $env:USERNAME');
-	    echo "<p class='maintext' style='display: block;'> '<strong>$adminuserName</strong>' Create User for '<strong>$name $surename</strong>' </p><br/>"; 
-		
-//    # Written By: http://vcloud-lab.com
-//    # Date: 19 January 2022
-//    # Env: Powershell 5.1, PHP (latest), JQuery (latest), HTML 5, CSS, XAMPP
-	
-#		$psfileoutput = shell_exec("PowerShell -ExecutionPolicy Unrestricted -NonInteractive -File Create-UserPassword.ps1 -UserAccount $name ");
-	    $psfileoutput = shell_exec("PowerShell -ExecutionPolicy Unrestricted -NonInteractive -File Create-UserPassword.ps1 -UserAccount $username -UserPassword $pass -GivenName $name -Surname $surename -EmailAddress $email ");
-	    echo '<pre>' . $psfileoutput . '</pre>';
-	echo "</div>";
-	
-
-
-
-
-
-    
+            u_approved = '1' 
+            WHERE u_username = '" . mysqli_real_escape_string($objCon, $username) . "'";
+$result = mysqli_query($objCon, $strSQL);
+if ($result) {
+    echo "<div class='container'>";
+    echo "<div class='bg-light p-5 rounded mt-3'>";
+    $adminuserName = shell_exec('powershell -ExecutionPolicy Unrestricted -Command $env:USERNAME');
+    echo "<p class='maintext' style='display: block;'> '$adminuserName' Create User for '$name $surename' </p><br/>"; 
+    $psfileoutput = shell_exec("PowerShell -ExecutionPolicy Unrestricted -NonInteractive -File Create-UserPassword.ps1 -UserAccount $username -UserPassword $pass -GivenName $name -Surname $surename -EmailAddress $email ");
+    echo '<pre>' . $psfileoutput . '</pre>';
+    echo "</div>";
+} else {
+    echo '<div class="container"><div class="bg-light p-5 rounded mt-3">';
+    echo '<p class="maintext" style="display: block;">Failed to update user approval status.</p><br/>';
+    echo "</div></div>";
+}
+mysqli_close($objCon);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <main class="form-signin shadow-lg">
         <form method="post" action="mail.php">
             <h1 class="h3 mb-3 fw-normal">Sendmail</h1>
