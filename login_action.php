@@ -28,7 +28,13 @@ if ($checkCredRow) {
             'fullname' => $res['u_name_en'],
             'level' => $res['u_level']
         );
-        echo '<script>alert("ยินดีต้อนรับคุณ ', $res['u_name_th'],'");window.location="admin.php";</script>';
+        
+        // ตรวจสอบระดับสิทธิ์และเปลี่ยนหน้าที่จะแสดงไปเเต่ละหน้า
+        if ($res['u_level'] == 'administrator') {
+            echo '<script>alert("ยินดีต้อนรับคุณ ', $res['u_name_th'],'");window.location="admin.php";</script>';
+        } else {
+            echo '<script>alert("ยินดีต้อนรับคุณ ', $res['u_name_th'],'");window.location="index.php";</script>';
+        }
     } else {
         echo '<script>alert("คุณยังไม่ได้รับการอนุมัติจากผู้ดูแลระบบ");window.location="login.html";</script>';
     }
