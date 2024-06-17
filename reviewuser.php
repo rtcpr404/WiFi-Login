@@ -67,10 +67,19 @@ include_once("./function.php");
         .img-container img {
             display: block;
             margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .img-container img.zoomable:hover {
+            transform: scale(1.1);
+        }
+        .img-container img.zoomable.zoomed {
+            transform: scale(2);
         }
         .page-title {
             text-align: center;
         }
+        
         @media (max-width: 576px) {
             .btn-lg {
                 padding: 10px 16px;
@@ -81,6 +90,24 @@ include_once("./function.php");
         }
     </style>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".zoomable").click(function(){
+                $(this).toggleClass("zoomed");
+            });
+        });
+    </script>
+    <script>
+        function confirmDelete() {
+            return confirm("คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้งานนี้?");
+        }
+    </script>
+    <script>
+        function confirmRegistration() {
+            return confirm("คุณแน่ใจหรือไม่ว่าต้องการทำการลงทะเบียน?");
+        }
+    </script>
+
 </head>
 
 <body>
@@ -158,12 +185,13 @@ include_once("./function.php");
                 <div class="mb-3">
                     <label for="u_img" class="form-label">รูปบัตรราชการ</label>
                 </div>
-                <div class="mb-3 img-container "><?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg" alt="Responsive image"/>';?></div>
+                <div class="mb-3 img-container "><?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg zoomable" alt="Responsive image"/>';?></div>
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_password" name="u_password" value="<?php echo $passwd; ?>" required>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
-                <a href="admin.php" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ย้อนกลับ</a>
+                <button onclick="return confirmRegistration();" class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
+                <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
+                <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ย้อนกลับ</a>
             </form>
         </div> 
     </div>
@@ -171,4 +199,3 @@ include_once("./function.php");
 </body>
 
 </html>
-

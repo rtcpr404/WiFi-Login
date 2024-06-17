@@ -189,15 +189,37 @@
         const confirmPasswordInput = document.getElementById('u_password_confirm');
 
         function checkPasswordMatch() {
-            if (passwordInput.value !== confirmPasswordInput.value) {
-                confirmPasswordInput.setCustomValidity('รหัสผ่านไม่ตรงกัน');
+            const passwordError = validatePassword(passwordInput.value);
+            if (passwordError) {
+                passwordInput.setCustomValidity(passwordError);
             } else {
-                confirmPasswordInput.setCustomValidity('');
+                passwordInput.setCustomValidity('');
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.setCustomValidity('รหัสผ่านไม่ตรงกัน');
+                } else {
+                    confirmPasswordInput.setCustomValidity('');
+                }
             }
         }
 
         passwordInput.addEventListener('input', checkPasswordMatch);
         confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+        function validatePassword(password) {
+            if (password.length < 6) {
+                return "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร";
+            }
+            if (!/\d/.test(password)) {
+                return "รหัสผ่านต้องประกอบด้วยตัวเลขอย่างน้อย 1 ตัว";
+            }
+            if (!/[a-z]/.test(password)) {
+                return "รหัสผ่านต้องประกอบด้วยตัวอักษรพิมพ์เล็กอย่างน้อย 1 ตัว";
+            }
+            if (!/[A-Z]/.test(password)) {
+                return "รหัสผ่านต้องประกอบด้วยตัวอักษรพิมพ์ใหญ่อย่างน้อย 1 ตัว";
+            }
+            return "";
+        }
     </script>
 </body>
 
