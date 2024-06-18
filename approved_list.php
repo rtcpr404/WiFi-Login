@@ -57,6 +57,10 @@ include_once("./function.php");
         .view-icon:hover {
             color: #0056b3;
         }
+        .view-column {
+            width: 150px; /* ขนาดที่พอดีกับคำว่า "ดูข้อมูลผู้ใช้" */
+            text-align: center; /* ไอคอนอยู่ตรงกลาง */
+        }
         @media (max-width: 576px) {
             .header-container a {
                 margin-bottom: 10px;
@@ -70,13 +74,13 @@ include_once("./function.php");
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="header-container">
-                <a href="admin.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                <h2>Approved List</h2>
-                <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+            <div class="header-container text-center">
+                <a><img src="image/logo.png" alt="Logo" class="mb-4"></a>
             </div>
             <div class="text-center mt-3">
+                <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
                 <a href="admin.php" class="btn btn-primary">User Not Approved List</a>
+                <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
             </div>
         </div>
         <?php    
@@ -84,15 +88,17 @@ include_once("./function.php");
         $strSQL = "SELECT * FROM user WHERE u_approved = 1";
         $result = mysqli_query($objCon, $strSQL); 
         ?>
-
         <div class="table-responsive mt-5">
+            <div class="header-container">
+                    <h2>Approved List</h2>
+            </div><br><br>
             <table class="table table-bordered table-striped">
                 <thead class="thead-light">
                     <tr align="center">
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
                         <th>Username</th>
-                        <th>การดำเนินการ</th>
+                        <th class="view-column">ดูข้อมูลผู้ใช้</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,7 +108,7 @@ include_once("./function.php");
                         echo "<td>" . $row["u_name_th"] . "</td>";
                         echo "<td>" . $row["u_surename_th"] . "</td>";
                         echo "<td>" . $row["u_username"] . "</td>";
-                        echo "<td>";
+                        echo "<td class='view-column'>";
                         echo "<a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a>";
                         echo "</td>";
                         echo "</tr>";

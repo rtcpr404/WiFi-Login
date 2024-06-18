@@ -23,7 +23,7 @@ include_once("./function.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าผู้ดูแลระบบ</title>
+    <title>User NOT Approved List</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -95,13 +95,13 @@ include_once("./function.php");
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="header-container">
-                <a href="index.php" class="btn btn-lg btn-success">กลับหน้าหลัก</a>
-                <h2>Not Approved List</h2>
-                <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+            <div class="header-container text-center">
+                <a><img src="image/logo.png" alt="Logo" class="mb-4"></a>
             </div>
             <div class="text-center mt-3">
+                <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
                 <a href="approved_list.php" class="btn btn-primary">User Approved List</a>
+                <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
             </div>
         </div>
         <?php    
@@ -111,6 +111,9 @@ include_once("./function.php");
         ?>
         
         <div class="table-responsive mt-5">
+            <div class="header-container">
+                <h2>NOT Approved List</h2>
+            </div><br><br>
             <table class="table table-bordered table-striped">
                 <thead class="thead-light">
                     <tr align="center">

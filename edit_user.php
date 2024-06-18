@@ -135,23 +135,85 @@ function generateUsername($name_en, $surename_en) {
             }
         }
     </style>
+    <script>
+        function confirmSave() {
+            return confirm('คุณต้องการบันทึกการเปลี่ยนแปลงจริงหรือไม่?');
+        }
+
+        function confirmBack() {
+            return confirm('คุณต้องการย้อนกลับไปยังหน้าก่อนหน้าจริงหรือไม่?');
+        }
+
+        function previewImage(input) {
+            const imagePreview = document.getElementById('image_preview');
+            imagePreview.innerHTML = ''; // เคลียร์ค่าพรีวิวเก่า (ถ้ามี)
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.classList.add('img-fluid');
+                    imgElement.alt = 'Preview Image';
+
+                    imagePreview.appendChild(imgElement);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // รับ reference ของ input ของชื่อและสกุล (อังกฤษ) และ Username
+            const nameInput = document.getElementById('u_name_en');
+            const surenameInput = document.getElementById('u_surename_en');
+            const usernameInput = document.getElementById('u_username');
+
+            // กำหนดค่าเริ่มต้นของ input ชื่อและสกุล (อังกฤษ)
+            nameInput.value = "<?php echo $name_en; ?>";
+            surenameInput.value = "<?php echo $surename_en; ?>";
+
+            // สร้าง Username ใหม่ตั้งแต่เริ่มต้น
+            updateUsername();
+
+            // เพิ่ม event listener เมื่อมีการพิมพ์ใน input ชื่อและสกุล (อังกฤษ)
+            nameInput.addEventListener('input', updateUsername);
+            surenameInput.addEventListener('input', updateUsername);
+
+            // function สำหรับสร้าง Username ใหม่
+            function updateUsername() {
+                const name = nameInput.value.trim().toLowerCase();
+                const surename = surenameInput.value.trim().toLowerCase();
+
+                // หาชื่อที่ตัดเฉพาะ 2 ตัวแรกของนามสกุล
+                const surenamePart = surename.substring(0, 2);
+
+                // สร้าง Username ใหม่
+                const newUsername = name + '.' + surenamePart;
+
+                // set ค่าของ input ช่อง Username
+                usernameInput.value = newUsername;
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
                 <div class="header-container">
-                    <a href="admin.php" class="btn btn-lg btn-success">ไปยัง Approved</a>
-                    <h2>Administrator</h2>
-                    <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
+                    <a href="admin.php" class="btn btn-primary btn-success">ไปยัง Approved</a>
+                    <h1>Edit Information User</h1>
+                    <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
                 </div>
             </div>
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <h2>EDIT USER : <?php echo $username; ?></h2>
+            <h3>EDITING USER : <?php echo $username; ?></h3>
         </div>
     </div>
     <div class="container mt-3">
         <div class="bg-light p-5 rounded shadow-lg">
-            <form method="post" action="update_user.php" enctype="multipart/form-data">
+            <form method="post" action="update_user.php" enctype="multipart/form-data" onsubmit="return confirmSave();">
                 <div class="mb-3">
                     <label for="u_name_th" class="form-label">ชื่อ (ไทย)</label>
                     <input type="text" class="form-control" id="u_name_th" name="u_name_th" pattern="[ก-๙]+" value="<?php echo $name_th; ?>" required>
@@ -211,68 +273,9 @@ function generateUsername($name_en, $surename_en) {
                 <input type="hidden" name="original_u_approved" value="<?php echo $row['u_approved']; ?>">
                 <input type="hidden" name="u_username" value="<?php echo $username; ?>">
                 <button type="submit" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
-                <a href="admin.php" class="btn btn-success" id="goBackBtn">ย้อนกลับ</a>
+                <a href="admin.php" class="btn btn-success" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
             </form>
         </div>
     </div>
-    <script>
-        function previewImage(input) {
-            const imagePreview = document.getElementById('image_preview');
-            imagePreview.innerHTML = ''; // เคลียร์ค่าพรีวิวเก่า (ถ้ามี)
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = e.target.result;
-                    imgElement.classList.add('img-fluid');
-                    imgElement.alt = 'Preview Image';
-
-                    imagePreview.appendChild(imgElement);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('goBackBtn').addEventListener('click', function() {
-                window.history.back(); // Go back in history
-                location.reload(); // Reload the page to prevent caching
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            // รับ reference ของ input ของชื่อและสกุล (อังกฤษ) และ Username
-            const nameInput = document.getElementById('u_name_en');
-            const surenameInput = document.getElementById('u_surename_en');
-            const usernameInput = document.getElementById('u_username');
-
-            // กำหนดค่าเริ่มต้นของ input ชื่อและสกุล (อังกฤษ)
-            nameInput.value = "<?php echo $name_en; ?>";
-            surenameInput.value = "<?php echo $surename_en; ?>";
-
-            // สร้าง Username ใหม่ตั้งแต่เริ่มต้น
-            updateUsername();
-
-            // เพิ่ม event listener เมื่อมีการพิมพ์ใน input ชื่อและสกุล (อังกฤษ)
-            nameInput.addEventListener('input', updateUsername);
-            surenameInput.addEventListener('input', updateUsername);
-
-            // function สำหรับสร้าง Username ใหม่
-            function updateUsername() {
-                const name = nameInput.value.trim().toLowerCase();
-                const surename = surenameInput.value.trim().toLowerCase();
-
-                // หาชื่อที่ตัดเฉพาะ 2 ตัวแรกของนามสกุล
-                const surenamePart = surename.substring(0, 2);
-
-                // สร้าง Username ใหม่
-                const newUsername = name + '.' + surenamePart;
-
-                // set ค่าของ input ช่อง Username
-                usernameInput.value = newUsername;
-            }
-        });
-    </script>
 </body>
 </html>

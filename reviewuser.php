@@ -22,7 +22,7 @@ $username = $_GET["u_username"];
 include_once("./function.php");
 
 $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
-$strSQL = "SELECT * FROM user where u_username = '$username' ";
+$strSQL = "SELECT * FROM user WHERE u_username = '$username'";
 $result = mysqli_query($objCon, $strSQL);
 if (!$result) {
     echo "Error: " . mysqli_error($objCon);
@@ -41,6 +41,7 @@ $rank = $row["u_rank"];
 $position = $row["u_position"];
 $passwd = base64_decode($row["u_password"]);
 $img = $row["u_img"];
+$u_level = $row["u_level"]; // เพิ่มการเก็บค่า u_level
 $u_approved = $row["u_approved"]; // เพิ่มการเก็บค่า u_approved
 
 mysqli_close($objCon);
@@ -53,7 +54,7 @@ mysqli_close($objCon);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP login</title>
+    <title>Registrant Details</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -138,16 +139,15 @@ mysqli_close($objCon);
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
-                <a href="admin.php" class="btn btn-lg btn-success btn-block">ไปยัง Approved</a>
-                <h2>Administrator Page</h2>
-                <a href="logout_action.php" class="btn btn-lg btn-danger btn-block">ออกจากระบบ</a>
+                <a href="admin.php" class="btn btn-primary btn-success btn-block">ไปยัง Approved</a>
+                <h1>Registrant Details</h1>
+                <a href="logout_action.php" class="btn btn-primary btn-danger btn-block">ออกจากระบบ</a>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <h1 class="page-title">รายละเอียดผู้ลงทะเบียน</h1><br>
+            <h2 class="page-title">รายละเอียดผู้ลงทะเบียน</h2><br>
             <form id="forme" method="post" action="/ps/approve.php">
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -203,30 +203,27 @@ mysqli_close($objCon);
                 <div class="mb-3">
                     <label for="u_img" class="form-label">รูปบัตรราชการ</label>
                 </div>
-                <div class="mb-3 img-container ">
-                    <?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg zoomable"
-                        alt="Responsive image"/>'; ?>
+                <div class="mb-3 img-container">
+                    <?php echo '<img src="data:image/gif;base64,' . $img . '" class="img-fluid shadow-lg zoomable" alt="Responsive image"/>'; ?>
                 </div>
                 <div class="mb-3">
-                    <input type="hidden" class="form-control" id="u_password" name="u_password"
-                        value="<?php echo $passwd; ?>" required>
+                    <input type="hidden" class="form-control" id="u_password" name="u_password" value="<?php echo $passwd; ?>" required>
                 </div>
 
                 <?php if ($u_approved != 1) : ?>
                 <!-- แสดงปุ่ม "ลงทะเบียน" เฉพาะเมื่อ u_approved เป็น 0 -->
-                <button onclick="return confirmRegistration();" class="w-100 btn btn-lg btn-primary shadow-lg btn-block"
-                    type="submit">ลงทะเบียน</button>
+                <button onclick="return confirmRegistration();" class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
                 <?php endif; ?>
 
-                <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();"
-                    class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
-                <a href="edit_user.php?u_username=<?php echo $username; ?>"
-                    class="w-100 btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a>
-                <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ย้อนกลับ</a>
+                <!-- แสดงปุ่มลบและแก้ไขเฉพาะเมื่อ u_level ไม่ใช่ 'administrator' -->
+                <?php if ($u_level != 'administrator') : ?>
+                <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
+                <a href="edit_user.php?u_username=<?php echo $username; ?>" class="w-100 btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a>
+                <?php endif; ?>
+
+                <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ไปยัง Approved</a>
             </form>
         </div>
     </div>
-
 </body>
-
 </html>
