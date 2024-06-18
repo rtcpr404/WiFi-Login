@@ -61,6 +61,10 @@ include_once("./function.php");
             width: 150px; /* ขนาดที่พอดีกับคำว่า "ดูข้อมูลผู้ใช้" */
             text-align: center; /* ไอคอนอยู่ตรงกลาง */
         }
+        .header-container a img {
+            max-width: 100%; /* รูปภาพจะไม่เกินขอบเขตของพื้นที่ที่ใช้แสดง */
+            height: auto; /* ให้รูปภาพปรับตามอัตราส่วนของมันเอง */
+        }
         @media (max-width: 576px) {
             .header-container a {
                 margin-bottom: 10px;
@@ -75,7 +79,7 @@ include_once("./function.php");
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container text-center">
-                <a><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+                <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
             </div>
             <div class="text-center mt-3">
                 <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
@@ -121,6 +125,11 @@ include_once("./function.php");
         <?php
         mysqli_close($objCon); // ปิดการเชื่อมต่อฐานข้อมูล
         ?>
+        <footer class="footer mt-5 bg-white text-dark py-3 rounded shadow">
+            <div class="container text-center">
+                <span>© Immigration Bureau: สำนักงานตรวจคนเข้าเมือง</span>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

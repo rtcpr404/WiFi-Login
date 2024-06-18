@@ -6,10 +6,6 @@ if (!isset($_SESSION['user_login'])) {
 }
 
 $user = $_SESSION['user_login'];
-if ($user['level'] != 'administrator') {
-    echo '<script>alert("สำหรับผู้ดูแลระบบเท่านั้น");window.location="index.php";</script>';
-    exit;
-}
 
 include_once("./function.php");
 
@@ -91,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($objCon, $strSQL);
 
     if ($result) {
-        echo "<script>alert('บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว'); window.location = 'admin.php';</script>";
+        echo "<script>alert('บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว'); window.location = 'index.php';</script>";
     } else {
         echo "Error updating record: " . mysqli_error($objCon);
     }

@@ -5,25 +5,19 @@ if (!isset($_SESSION['user_login'])) {
     exit;
 }
 
-$user = $_SESSION['user_login'];
-if ($user['level'] != 'administrator') {
-    echo '<script>alert("สำหรับผู้ดูแลระบบเท่านั้น");window.location="index.php";</script>';
-    exit;
-}
-
 include_once("./function.php");
 
-// ตรวจสอบว่ามีการส่ง u_username มาหรือไม่
-if (!isset($_GET['u_username']) || $_GET['u_username'] == '') {
-    echo "<script>alert('ไม่พบข้อมูลผู้ใช้งาน'); window.location = 'admin.php';</script>";
+// ตรวจสอบว่ามีการส่ง u_id มาหรือไม่
+if (!isset($_GET['u_id']) || $_GET['u_id'] == '') {
+    echo "<script>alert('ไม่พบข้อมูลผู้ใช้งาน'); window.location = 'index.php';</script>";
     exit;
 }
 
-$username = $_GET['u_username'];
+$userid = $_GET['u_id'];
 
 // ดึงข้อมูลผู้ใช้งานจากฐานข้อมูล
 $objCon = connectDB();
-$strSQL = "SELECT * FROM user WHERE u_username = '$username'";
+$strSQL = "SELECT * FROM user WHERE u_id = '$userid'";
 $result = mysqli_query($objCon, $strSQL);
 
 if (!$result) {
@@ -32,7 +26,7 @@ if (!$result) {
 }
 
 if (mysqli_num_rows($result) == 0) {
-    echo "<script>alert('ไม่พบข้อมูลผู้ใช้งาน'); window.location = 'admin.php';</script>";
+    echo "<script>alert('ไม่พบข้อมูลผู้ใช้งาน'); window.location = 'index.php';</script>";
     exit;
 }
 
@@ -46,6 +40,7 @@ $email = $row["u_email"];
 $rank = $row["u_rank"];
 $position = $row["u_position"];
 $img = $row["u_img"];
+$username = $row["u_username"]; // Assuming there is a column u_username
 
 mysqli_close($objCon);
 
@@ -70,7 +65,7 @@ function generateUsername($name_en, $surename_en) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User</title>
+    <title>Edit Profile</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -201,14 +196,12 @@ function generateUsername($name_en, $surename_en) {
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-                <div class="header-container">
-                    <a href="admin.php" class="btn btn-primary btn-success">ไปยัง Approved</a>
-                    <h1>Edit Information User</h1>
-                    <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
-                </div>
+            <div class="header-container text-center">
+                <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+            </div>
         </div>
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-                <h3>EDITING USER : <?php echo $username; ?></h3>
+          <h3>EDITING USER : <?php echo $username; ?></h3>
         </div>
     </div>
     <div class="container mt-3">
@@ -266,16 +259,11 @@ function generateUsername($name_en, $surename_en) {
                     <label for="u_password_confirm" class="form-label">ยืนยัน Password</label>
                     <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm">
                 </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="u_approved" name="u_approved" value="1" <?php echo $row['u_approved'] == 1 ? 'checked' : ''; ?> <?php echo $user['level'] != 'administrator' ? 'disabled' : ''; ?>>
-                    <label class="form-check-label" for="u_approved">อนุมัติผู้ใช้งาน</label>
-                </div>
-                <input type="hidden" name="original_u_approved" value="<?php echo $row['u_approved']; ?>">
-                <input type="hidden" name="u_username" value="<?php echo $username; ?>">
                 <button type="submit" class="btn btn-success">บันทึกการเปลี่ยนแปลง</button>
-                <a href="admin.php" class="btn btn-danger" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
+                <a href="index.php" class="btn btn-danger" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
             </form>
         </div>
     </div>
 </body>
+
 </html>

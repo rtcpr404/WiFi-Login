@@ -224,6 +224,11 @@ mysqli_close($objCon);
                 <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ไปยัง Approved</a>
             </form>
         </div>
+        <footer class="footer mt-5 bg-white text-dark py-3 rounded shadow">
+            <div class="container text-center">
+                <span>© Immigration Bureau: สำนักงานตรวจคนเข้าเมือง</span>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

@@ -56,12 +56,17 @@ $user = $_SESSION['user_login'];
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
                 <img src="image/logo.png" alt="Logo" class="logo mb-4"><br>
-                <h1>สวัสดีคุณ : <?php echo $user['fullname']; ?> <br> ระดับผู้ใช้ของคุณ : <?php echo $user['level']; ?> </h1>
+                <?php if (isset($user['fullname']) && isset($user['level'])) : ?>
+                    <h1>สวัสดีคุณ : <?php echo htmlspecialchars($user['fullname']); ?> <br> ระดับผู้ใช้ของคุณ : <?php echo htmlspecialchars($user['level']); ?> </h1>
+                <?php endif; ?>
             </div>
             <div class="btn-container mt-3">
-                <?php if ($user['level'] == 'administrator') { // แสดงลิงค์ไปยังหน้าผู้ดูแลระบบเมื่อผู้ใช้เป็นแอดมิน ?>
+                <?php if (isset($user['level']) && $user['level'] == 'administrator') : ?>
                     <a href="admin.php" class="btn btn-lg btn-warning">หน้าสำหรับผู้ดูแลระบบ</a>
-                <?php } ?>
+                <?php endif; ?>
+                <?php if (isset($user['id'])) : ?>
+                    <a href="edit_profile.php?u_id=<?php echo urlencode($user['id']); ?>" class="btn btn-lg btn-success">แก้ไขข้อมูลตนเอง</a>
+                <?php endif; ?>
                 <a href="logout_action.php" class="btn btn-lg btn-danger">ออกจากระบบ</a>
             </div>
         </div>
