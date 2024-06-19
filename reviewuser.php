@@ -41,8 +41,8 @@ $rank = $row["u_rank"];
 $position = $row["u_position"];
 $passwd = base64_decode($row["u_password"]);
 $img = $row["u_img"];
-$u_level = $row["u_level"]; // เพิ่มการเก็บค่า u_level
-$u_approved = $row["u_approved"]; // เพิ่มการเก็บค่า u_approved
+$u_level = $row["u_level"];
+$u_approved = $row["u_approved"];
 
 mysqli_close($objCon);
 ?>
@@ -218,11 +218,9 @@ mysqli_close($objCon);
                 </div>
 
                 <?php if ($u_approved != 1) : ?>
-                <!-- แสดงปุ่ม "ลงทะเบียน" เฉพาะเมื่อ u_approved เป็น 0 -->
                 <button onclick="return confirmRegistration();" class="w-100 btn btn-lg btn-primary shadow-lg btn-block" type="submit">ลงทะเบียน</button>
                 <?php endif; ?>
 
-                <!-- แสดงปุ่มลบและแก้ไขเฉพาะเมื่อ u_level ไม่ใช่ 'administrator' -->
                 <?php if ($u_level != 'administrator') : ?>
                 <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
                 <a href="edit_user.php?u_username=<?php echo $username; ?>" class="w-100 btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a>

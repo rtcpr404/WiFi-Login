@@ -40,7 +40,7 @@ $email = $row["u_email"];
 $rank = $row["u_rank"];
 $position = $row["u_position"];
 $img = $row["u_img"];
-$username = $row["u_username"]; // Assuming there is a column u_username
+$username = $row["u_username"];
 
 mysqli_close($objCon);
 
@@ -49,10 +49,8 @@ function generateUsername($name_en, $surename_en) {
     $name_lower = strtolower($name_en);
     $surename_lower = strtolower($surename_en);
     
-    // Get first two characters of surname (or full surname if less than two characters)
     $surename_part = substr($surename_lower, 0, 2);
 
-    // Concatenate name and first two characters of surname
     $new_username = $name_lower . '.' . $surename_part;
 
     return $new_username;

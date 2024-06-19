@@ -58,12 +58,12 @@ include_once("./function.php");
             color: #0056b3;
         }
         .view-column {
-            width: 150px; /* ขนาดที่พอดีกับคำว่า "ดูข้อมูลผู้ใช้" */
-            text-align: center; /* ไอคอนอยู่ตรงกลาง */
+            width: 150px;
+            text-align: center;
         }
         .header-container a img {
-            max-width: 100%; /* รูปภาพจะไม่เกินขอบเขตของพื้นที่ที่ใช้แสดง */
-            height: auto; /* ให้รูปภาพปรับตามอัตราส่วนของมันเอง */
+            max-width: 100%;
+            height: auto;
         }
         @media (max-width: 576px) {
             .header-container a {
@@ -84,46 +84,46 @@ include_once("./function.php");
                     </div>
                 </div>
             </div>
-        <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="text-center mt-3">
-                <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
-                <a href="admin.php" class="btn btn-primary">User Not Approved List</a>
-                <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
-            </div>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg text-center">
+            <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
+            <a href="admin.php" class="btn btn-primary">User Not Approved List</a>
+            <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
         </div>
         <?php    
         $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
         $strSQL = "SELECT * FROM user WHERE u_approved = 1";
         $result = mysqli_query($objCon, $strSQL); 
         ?>
-        <div class="table-responsive mt-5">
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
-                    <h2>Approved List</h2>
-            </div><br><br>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-light">
-                    <tr align="center">
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
-                        <th>Username</th>
-                        <th class="view-column">ดูข้อมูลผู้ใช้</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while($row = mysqli_fetch_array($result)) { 
-                        echo "<tr align='center'>";
-                        echo "<td>" . $row["u_name_th"] . "</td>";
-                        echo "<td>" . $row["u_surename_th"] . "</td>";
-                        echo "<td>" . $row["u_username"] . "</td>";
-                        echo "<td class='view-column'>";
-                        echo "<a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+                <h2>Approved List</h2>
+            </div>
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-light">
+                        <tr align="center">
+                            <th>ชื่อ</th>
+                            <th>นามสกุล</th>
+                            <th>Username</th>
+                            <th class="view-column">ดูข้อมูลผู้ใช้</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_array($result)) { 
+                            echo "<tr align='center'>";
+                            echo "<td>" . $row["u_name_th"] . "</td>";
+                            echo "<td>" . $row["u_surename_th"] . "</td>";
+                            echo "<td>" . $row["u_username"] . "</td>";
+                            echo "<td class='view-column'>";
+                            echo "<a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <?php

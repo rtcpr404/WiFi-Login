@@ -83,8 +83,8 @@ include_once("./function.php");
             height: 100%;
         }
         .header-container a img {
-            max-width: 100%; /* รูปภาพจะไม่เกินขอบเขตของพื้นที่ที่ใช้แสดง */
-            height: auto; /* ให้รูปภาพปรับตามอัตราส่วนของมันเอง */
+            max-width: 100%;
+            height: auto;
         }
         @media (max-width: 576px) {
             .header-container a {
@@ -106,45 +106,44 @@ include_once("./function.php");
             </div>
         </div>
         
-        <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="text-center mt-3">
-                <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
-                <a href="approved_list.php" class="btn btn-primary">User Approved List</a>
-                <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
-            </div>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg text-center">
+            <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
+            <a href="approved_list.php" class="btn btn-primary">User Approved List</a>
+            <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
         </div>
         <?php    
         $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
         $strSQL = "SELECT * FROM user WHERE u_approved = 0";
         $result = mysqli_query($objCon, $strSQL); 
         ?>
-        
-        <div class="table-responsive mt-5">
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
                 <h2>NOT Approved List</h2>
-            </div><br><br>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-light">
-                    <tr align="center">
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
-                        <th>Username</th>
-                        <th class="user-info-col">ดูข้อมูลผู้ใช้</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while($row = mysqli_fetch_array($result)) { 
-                        echo "<tr align='center'>";
-                        echo "<td>" . $row["u_name_th"] . "</td>";
-                        echo "<td>" . $row["u_surename_th"] . "</td>";
-                        echo "<td>" . $row["u_username"] . "</td>";
-                        echo "<td class='user-info-col'><a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            </div>
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-light">
+                        <tr align="center">
+                            <th>ชื่อ</th>
+                            <th>นามสกุล</th>
+                            <th>Username</th>
+                            <th class="user-info-col">ดูข้อมูลผู้ใช้</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_array($result)) { 
+                            echo "<tr align='center'>";
+                            echo "<td>" . $row["u_name_th"] . "</td>";
+                            echo "<td>" . $row["u_surename_th"] . "</td>";
+                            echo "<td>" . $row["u_username"] . "</td>";
+                            echo "<td class='user-info-col'><a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a></td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <?php

@@ -54,10 +54,8 @@ function generateUsername($name_en, $surename_en) {
     $name_lower = strtolower($name_en);
     $surename_lower = strtolower($surename_en);
     
-    // Get first two characters of surname (or full surname if less than two characters)
     $surename_part = substr($surename_lower, 0, 2);
 
-    // Concatenate name and first two characters of surname
     $new_username = $name_lower . '.' . $surename_part;
 
     return $new_username;
