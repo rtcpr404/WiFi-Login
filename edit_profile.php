@@ -122,6 +122,10 @@ function generateUsername($name_en, $surename_en) {
             align-items: center;
             height: 100%;
         }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
         @media (max-width: 576px) {
             .header-container a {
                 margin-bottom: 10px;
