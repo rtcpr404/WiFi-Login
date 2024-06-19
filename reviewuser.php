@@ -139,6 +139,13 @@ mysqli_close($objCon);
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
+                <div class="header-container text-center">
+                    <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
+            <div class="header-container">
                 <a href="admin.php" class="btn btn-primary btn-success btn-block">ไปยัง Approved</a>
                 <h1>Registrant Details</h1>
                 <a href="logout_action.php" class="btn btn-primary btn-danger btn-block">ออกจากระบบ</a>
@@ -151,12 +158,12 @@ mysqli_close($objCon);
             <form id="forme" method="post" action="/ps/approve.php">
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="u_name_th" class="form-label">ชื่อ</label>
+                        <label for="u_name_th" class="form-label">ชื่อ ภาษาไทย</label>
                         <input type="text" readonly class="form-control" id="u_name_th" name="u_name_th"
                             value="<?php echo $name_th; ?>" required>
                     </div>
                     <div class="col-sm-6 mb-3">
-                        <label for="u_surename_th" class="form-label">สกุล</label>
+                        <label for="u_surename_th" class="form-label">สกุล ภาษาไทย</label>
                         <input type="text" readonly class="form-control" id="u_surename_th" name="u_surename_th"
                             value="<?php echo $surename_th; ?>" required>
                     </div>

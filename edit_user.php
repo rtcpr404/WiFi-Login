@@ -200,6 +200,13 @@ function generateUsername($name_en, $surename_en) {
 </head>
 <body>
     <div class="container">
+    <div class="bg-light p-5 rounded mt-3 shadow-lg">
+            <div class="header-container">
+                <div class="header-container text-center">
+                    <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+                </div>
+            </div>
+        </div>
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
                 <div class="header-container">
                     <a href="admin.php" class="btn btn-primary btn-success">ไปยัง Approved</a>
@@ -276,6 +283,11 @@ function generateUsername($name_en, $surename_en) {
                 <a href="admin.php" class="btn btn-danger" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
             </form>
         </div>
+        <footer class="footer mt-5 bg-white text-dark py-3 rounded shadow">
+            <div class="container text-center">
+                <span>© Immigration Bureau: สำนักงานตรวจคนเข้าเมือง</span>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

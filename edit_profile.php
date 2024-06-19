@@ -267,6 +267,11 @@ function generateUsername($name_en, $surename_en) {
                 <a href="index.php" class="btn btn-danger" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
             </form>
         </div>
+        <footer class="footer mt-5 bg-white text-dark py-3 rounded shadow">
+            <div class="container text-center">
+                <span>© Immigration Bureau: สำนักงานตรวจคนเข้าเมือง</span>
+            </div>
+        </footer>
     </div>
 </body>
 

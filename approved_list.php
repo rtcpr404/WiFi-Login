@@ -78,9 +78,13 @@ include_once("./function.php");
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="header-container text-center">
-                <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+                <div class="header-container">
+                    <div class="header-container text-center">
+                        <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
+                    </div>
+                </div>
             </div>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="text-center mt-3">
                 <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
                 <a href="admin.php" class="btn btn-primary">User Not Approved List</a>
