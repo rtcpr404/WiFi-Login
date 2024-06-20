@@ -105,7 +105,10 @@ mysqli_close($objCon);
         .page-title {
             text-align: center;
         }
-        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
         @media (max-width: 576px) {
             .btn-lg {
                 padding: 10px 16px;

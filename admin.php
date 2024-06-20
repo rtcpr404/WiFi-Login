@@ -98,12 +98,8 @@ include_once("./function.php");
 </head>
 <body>
     <div class="container">
-        <div class="bg-light p-5 rounded mt-3 shadow-lg">
-            <div class="header-container">
-                <div class="header-container text-center">
-                    <a href="#"><img src="image/logo.png" alt="Logo" class="mb-4"></a>
-                </div>
-            </div>
+        <div class="bg-light p-5 rounded mt-3 shadow-lg header-container text-center">
+            <a href="#"><img src="image/logo.png" alt="Logo"></a>
         </div>
         
         <div class="bg-light p-5 rounded mt-3 shadow-lg text-center">
