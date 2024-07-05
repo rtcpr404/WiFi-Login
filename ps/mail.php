@@ -19,13 +19,14 @@ if($_POST["u_email"]==''){
 include_once("../function.php");
 $email = $_POST["u_email"];
 $name = $_POST["u_username"];
+$pass = $_POST["u_password"];
 
 
 
 $to = $email;
 $subject = 'Hello from IMM!';
 $message = 'การลงทะเบียนขอใช้งาน Wi-Fi ของท่านได้รับการอนุมัติเรียบร้อยแล้ว
-ท่านสามารถเข้าใช้งาน Wi-Fi ชื่อ IMM_WiFi ';
+ท่านสามารถเข้าใช้งาน Wi-Fi ชื่อ IMM_WiFi โดยใช้ชื่อผู้ใช้: '.$name.' และรหัสผ่าน: '.$pass;
 $headers = "From: bunma@primes.co.th\r\n";
 if (mail($to, $subject, $message, $headers)) {
    echo "SUCCESS";
@@ -34,7 +35,7 @@ if (mail($to, $subject, $message, $headers)) {
 }
 
 // Simulate an HTTP redirect:
-header("Location: http://192.168.1.100/admin.php");
+header("Location: http://10.10.22.11/admin.php");
 exit();
 
 ?>

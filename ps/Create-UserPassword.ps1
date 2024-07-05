@@ -26,7 +26,7 @@ $userParams = @{
     Surname = $Surname
     Name = $GivenName
     SamAccountName = $UserAccount
-    Path = "OU=wifi,DC=imm,DC=go,DC=th" # Adjust the OU path as necessary
+    Path = "OU=IMM-Users,DC=imm,DC=go,DC=th" # Adjust the OU path as necessary OU=IMM-Users,DC=imm,DC=go,DC=th
     EmailAddress = $EmailAddress
     DisplayName = $GivenName
     AccountPassword = $encryptedPassword
@@ -48,7 +48,7 @@ try {
 New-ADUser @userParams
 
 # Add user to group
-Add-ADGroupMember -Identity "wifi" -Members $UserAccount
+Add-ADGroupMember -Identity "IMM-Groups" -Members $UserAccount
 
 $htmlReport += "<h2>Create User: $UserAccount $Surname success</h2>`n"
 

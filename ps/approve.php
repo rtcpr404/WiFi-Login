@@ -116,8 +116,10 @@ mysqli_close($objCon);
             <input type="hidden" class="form-control" id="u_password" name="u_email" value="<?php echo $email; ?>" required>
             </div>
             <div class="form-floating">
-            <input type="hidden" class="form-control" id="u_password" name="u_username" value="<?php echo $username; ?>" required>
-                
+            <input type="hidden" class="form-control" id="u_password" name="u_username" value="<?php echo $username; ?>" required> 
+            </div>
+  	<div class="form-floating">
+            <input type="hidden" class="form-control" id="u_password" name="u_password" value="<?php echo $pass; ?>" required> 
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sendmail</button>
         </form>
