@@ -111,8 +111,7 @@ include_once("./function.php");
                             echo "<td>" . $row["u_name_th"] . "</td>";
                             echo "<td>" . $row["u_surename_th"] . "</td>";
                             echo "<td>" . $row["u_username"] . "</td>";
-                            echo "<td class='view-column'>";
-                            echo "<a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a>";
+			    echo "<td class='user-info-col'><a class='view-btn' href='reviewuser.php?u_username=" . $row["u_username"] . "'>ดูข้อมูล</a></td>";
                             echo "</td>";
                             echo "</tr>";
                         }

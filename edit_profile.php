@@ -261,6 +261,7 @@ function generateUsername($name_en, $surename_en) {
                     <label for="u_password_confirm" class="form-label">ยืนยัน Password</label>
                     <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm">
                 </div>
+                <input type="hidden" name="u_id" value="<?php echo $userid; ?>">
                 <button type="submit" class="btn btn-success">บันทึกการเปลี่ยนแปลง</button>
                 <a href="index.php" class="btn btn-danger" id="goBackBtn" onclick="return confirmBack();">ย้อนกลับ</a>
             </form>

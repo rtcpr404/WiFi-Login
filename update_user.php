@@ -11,6 +11,7 @@ include_once("./function.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate form input
+    $u_id = $_POST['u_id'];
     $username = $_POST['u_username'];
     $name_th = $_POST['u_name_th'];
     $surename_th = $_POST['u_surename_th'];
@@ -40,6 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Update user information in database
     $objCon = connectDB();
+    if (!$objCon) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
     // Prepare image update if new image uploaded
     if ($_FILES['new_image']['name'] !== '') {
@@ -82,15 +86,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                $password_sql
                $img_sql,
                u_username = '$new_username'
-               WHERE u_username = '$username'";
+               WHERE u_id = '$u_id'";
 
     $result = mysqli_query($objCon, $strSQL);
-
     if ($result) {
-        echo "<script>alert('บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว'); window.location = 'index.php';</script>";
+        if (mysqli_affected_rows($objCon) > 0) {
+            echo "<script>alert('บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว'); window.location = 'index.php';</script>";
+        } else {
+            echo "<script>alert('ไม่มีการเปลี่ยนแปลงข้อมูล'); window.history.back();</script>";
+        }
     } else {
         echo "Error updating record: " . mysqli_error($objCon);
     }
+
+    // if ($result) {
+    //     echo "<script>alert('บันทึกการเปลี่ยนแปลงเรียบร้อยแล้ว'); window.location = 'index.php';</script>";
+    // } else {
+    //     echo "Error updating record: " . mysqli_error($objCon);
+    // }
 
     mysqli_close($objCon);
 }

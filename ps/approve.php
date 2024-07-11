@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_login'])) { // ถ้าไม่ได้เข้าระบบอยู่
-    header("location: http://192.168.1.100/login.php"); // redirect ไปยังหน้า login.php
+    header("location: http://10.10.20.11/login.php"); // redirect ไปยังหน้า login.php
     exit;
 }
 

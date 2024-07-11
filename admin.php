@@ -19,6 +19,7 @@ include_once("./function.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,53 +40,96 @@ include_once("./function.php");
             align-items: center;
             flex-wrap: wrap;
         }
+
         .header-container h2 {
             flex-grow: 1;
             text-align: center;
             margin: 0;
         }
+
         .table {
             border-collapse: collapse;
             width: 100%;
             box-shadow: 10px 2px 10px rgba(0, 0, 0, 0.5);
         }
-        th, td {
+
+        th,
+        td {
             text-align: left;
             padding: 8px;
         }
+
         th {
             background-color: #f2f2f2;
         }
-        .btn-success, .btn-danger {
+
+        .btn-success,
+        .btn-danger {
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
         }
+
         .view-icon {
             color: #007bff;
             transition: color 0.3s ease;
         }
+
         .view-icon:hover {
             color: #0056b3;
         }
+
         td a {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
         }
+
         .user-info-col {
             width: 1%;
             white-space: nowrap;
         }
+
         .approve-btn {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
         }
+
         .header-container a img {
             max-width: 100%;
             height: auto;
         }
+
+        .header-container h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-container .d-flex {
+            flex-wrap: wrap;
+        }
+
+        #lastUpdate {
+            margin-left: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .header-container .d-flex {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #manualUpdate,
+            #lastUpdate {
+                margin-bottom: 0.5rem;
+            }
+
+            #lastUpdate {
+                margin-left: 0;
+            }
+        }
+
         @media (max-width: 576px) {
             .header-container a {
                 margin-bottom: 10px;
@@ -94,30 +138,35 @@ include_once("./function.php");
             }
         }
     </style>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="bg-light p-5 rounded mt-3 shadow-lg header-container text-center">
             <a href="#"><img src="image/logo.png" alt="Logo"></a>
         </div>
-        
+
         <div class="bg-light p-5 rounded mt-3 shadow-lg text-center">
             <a href="index.php" class="btn btn-primary btn-success">ไปยังหน้าเริ่มต้น</a>
             <a href="approved_list.php" class="btn btn-primary">User Approved List</a>
             <a href="logout_action.php" class="btn btn-primary btn-danger">ออกจากระบบ</a>
         </div>
-        <?php    
-        $objCon = connectDB(); // เชื่อมต่อฐานข้อมูล
-        $strSQL = "SELECT * FROM user WHERE u_approved = 0";
-        $result = mysqli_query($objCon, $strSQL); 
-        ?>
+
         <div class="bg-light p-5 rounded mt-3 shadow-lg">
             <div class="header-container">
-                <h2>NOT Approved List</h2>
+                <h2 class="mb-4">NOT Approved List</h2>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <button id="manualUpdate" class="btn btn-primary">อัพเดทข้อมูล</button>
+                <span id="lastUpdate" class="ml-2">อัพเดทล่าสุด: -</span>
+            </div>
+            <div id="loadingIndicator" class="text-center mt-3" style="display:none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">กำลังโหลด...</span>
+                </div>
             </div>
             <div class="table-responsive mt-5">
-                <table class="table table-bordered table-striped">
+                <table id="userTable" class="table table-bordered table-striped">
                     <thead class="thead-light">
                         <tr align="center">
                             <th>ชื่อ</th>
@@ -127,29 +176,67 @@ include_once("./function.php");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        while($row = mysqli_fetch_array($result)) { 
-                            echo "<tr align='center'>";
-                            echo "<td>" . $row["u_name_th"] . "</td>";
-                            echo "<td>" . $row["u_surename_th"] . "</td>";
-                            echo "<td>" . $row["u_username"] . "</td>";
-                            echo "<td class='user-info-col'><a href='reviewuser.php?u_username=" . $row["u_username"] . "'><i class='fas fa-eye view-icon'></i></a></td>";
-                            echo "</tr>";
-                        }
-                        ?>
+                        <!-- ข้อมูลจะถูกเพิ่มที่นี่ -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <?php
-        mysqli_close($objCon); // ปิดการเชื่อมต่อฐานข้อมูล
-        ?>
         <footer class="footer mt-5 bg-white text-dark py-3 rounded shadow">
             <div class="container text-center">
                 <span>© Immigration Bureau: สำนักงานตรวจคนเข้าเมือง</span>
             </div>
         </footer>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateTable() {
+            $('#loadingIndicator').show();
+            $.ajax({
+                url: 'fetch_unapproved_users.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var tableBody = $('#userTable tbody');
+                    tableBody.empty();
+                    $.each(data, function(i, user) {
+                        var row = '<tr align="center">' +
+                            '<td>' + user.u_name_th + '</td>' +
+                            '<td>' + user.u_surename_th + '</td>' +
+                            '<td>' + user.u_username + '</td>' +
+                            '<td class="user-info-col"><a class="view-btn" href="reviewuser.php?u_username=' + user.u_username + '">ดูข้อมูล</a></td>' +
+                            '</tr>';
+                        tableBody.append(row);
+                    });
+                    updateLastUpdateTime();
+                },
+                error: function() {
+                    console.log('Error fetching data');
+                },
+                complete: function() {
+                    $('#loadingIndicator').hide();
+                }
+            });
+        }
+
+        function updateLastUpdateTime() {
+            var now = new Date();
+            var formattedTime = now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0') + ':' +
+                now.getSeconds().toString().padStart(2, '0');
+            $('#lastUpdate').text('อัพเดทล่าสุด: ' + formattedTime);
+        }
+
+        $(document).ready(function() {
+            updateTable();
+            setInterval(updateTable, 15000); // อัพเดทไทม์
+
+            $('#manualUpdate').click(function() {
+                updateTable();
+            });
+        });
+    </script>
 </body>
+
 </html>

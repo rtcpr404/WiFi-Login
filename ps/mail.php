@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_login'])) { // ถ้าไม่ได้เข้าระบบอยู่
-    header("location: http://192.168.1.100/login.php"); // redirect ไปยังหน้า login.php
+    header("location: http://10.10.22.11/login.php"); // redirect ไปยังหน้า login.php
     exit;
 }
 
@@ -19,14 +19,13 @@ if($_POST["u_email"]==''){
 include_once("../function.php");
 $email = $_POST["u_email"];
 $name = $_POST["u_username"];
-$pass = $_POST["u_password"];
 
 
 
 $to = $email;
 $subject = 'Hello from IMM!';
 $message = 'การลงทะเบียนขอใช้งาน Wi-Fi ของท่านได้รับการอนุมัติเรียบร้อยแล้ว
-ท่านสามารถเข้าใช้งาน Wi-Fi ชื่อ IMM_WiFi โดยใช้ชื่อผู้ใช้: '.$name.' และรหัสผ่าน: '.$pass;
+ท่านสามารถเข้าใช้งาน Wi-Fi ชื่อ IMM_WiFi ';
 $headers = "From: bunma@primes.co.th\r\n";
 if (mail($to, $subject, $message, $headers)) {
    echo "SUCCESS";
