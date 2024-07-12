@@ -17,6 +17,13 @@
             max-width: 100%;
             height: auto;
         }
+
+        @media (max-width: 768px) {
+            button.btn-warning {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 
@@ -41,21 +48,25 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_th" class="form-label">ชื่อ ภาษาไทย</label>
-                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ" required>
+                        <input type="text" class="form-control" id="u_name_th" name="u_name_th" placeholder="ชื่อ"
+                            required>
                     </div>
                     <div class="col-sm-6 mb-3">
-                        <label for="u_surename_th" class="form-label">สกุล ภาษาไทย</label>
-                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th" placeholder="สกุล" required>
+                        <label for="u_surename_th" class="form-label">นามสกุล ภาษาไทย</label>
+                        <input type="text" class="form-control" id="u_surename_th" name="u_surename_th"
+                            placeholder="นามสกุล" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="u_name_en" class="form-label">ชื่อ ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name" required>
+                        <input type="text" class="form-control" id="u_name_en" name="u_name_en" placeholder="Name"
+                            required>
                     </div>
                     <div class="col-sm-6 mb-3">
-                        <label for="u_surename_en" class="form-label">สกุล ภาษาอังกฤษ</label>
-                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en" placeholder="Surename" required>
+                        <label for="u_surename_en" class="form-label">นามสกุล ภาษาอังกฤษ</label>
+                        <input type="text" class="form-control" id="u_surename_en" name="u_surename_en"
+                            placeholder="Surename" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -65,7 +76,8 @@
                     </div>
                     <div class="col-sm-6 mb-3">
                         <label for="u_position" class="form-label">ตำแหน่ง</label>
-                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง" required>
+                        <input type="text" class="form-control" id="u_position" name="u_position" placeholder="ตำแหน่ง"
+                            required>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -77,29 +89,59 @@
                     <input type="email" class="form-control" id="u_email" name="u_email" placeholder="E-mail" required>
                 </div>
                 <div class="mb-3">
-                    <label for="u_username" class="form-label">Username</label>
-                    <input type="text" readonly class="form-control" id="u_username" name="u_username" value="" placeholder="" required>
-                </div>
-                <div class="mb-3">
-                    <label for="u_password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Password" required>
-                    <small id="passwordHelp" class="form-text text-muted">ต้องมีความยาวอย่างน้อย 6 ตัวอักษร ประกอบด้วยตัวเลขอย่างน้อย 1 ตัวและตัวอักษรใหญ่อย่างน้อย 1 ตัว</small>
-                </div>
-                <div class="mb-3">
-                    <label for="u_password_confirm" class="form-label">confirm-Password</label>
-                    <input type="password" class="form-control" id="u_password_confirm" name="u_password_confirm" placeholder="Confirm -Password" required>
-                </div>
-                <div class="mb-3">
                     <input type="hidden" class="form-control" id="u_level" name="u_level" value="user">
                 </div>
                 <div class="mb-3">
                     <label for="u_img" class="form-label">Upload รูปบัตรราชการ</label>
-                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ" required>
+                    <input type="file" class="form-control" id="u_img" name="u_img" placeholder="Upload รูปบัตรราชการ"
+                        required>
                 </div>
                 <div class="mb-3 preview-container">
                     <img id="preview-img" src="#" alt="Preview Image" style="max-width: 200px; display: none;">
                 </div>
-                <button class="w-100 btn btn-lg btn-primary shadow-lg" type="submit">ลงทะเบียน</button>
+                <div class="mb-4 border p-3 rounded bg-light">
+                    <h4 class="text-danger fw-bold">ข้อมูลสำคัญกรุณาจดจำข้อมูลต่อไปนี้</h4>
+                    <div class="mb-3">
+                        <label for="u_username" class="form-label fw-bold text-danger">Username</label>
+                        <input type="text" readonly class="form-control border" id="u_username" name="u_username"
+                            value="" placeholder="" required>
+                            <small id="passwordHelp" class="form-text text-muted">ยูสเซอร์เนมของท่าน</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="u_password" class="form-label fw-bold text-danger">Password</label>
+                        <input type="password" class="form-control border " id="u_password" name="u_password"
+                            placeholder="Password" required>
+                        <small id="passwordHelp" class="form-text text-muted">ต้องมีความยาวอย่างน้อย 6 ตัวอักษร
+                            ประกอบด้วยตัวเลขอย่างน้อย 1 ตัวและตัวอักษรใหญ่อย่างน้อย 1 ตัว</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="u_password_confirm" class="form-label fw-bold text-danger">Confirm-Password</label>
+                        <input type="password" class="form-control border " id="u_password_confirm"
+                            name="u_password_confirm" placeholder="Confirm -Password" required>
+                        <small id="passwordHelp" class="form-text text-muted">กรอกพาสเวิร์ดของท่านอีกรอบเพื่อยืนยัน</small>
+                    </div>
+                </div>
+                <!-- Agreement text below the checkbox -->
+                <div class="mb-1">
+                    <p class="fw-bold text-danger">กรุณาอ่านและยอมรับข้อตกลงและเงื่อนไขก่อนที่คุณจะเริ่มใช้ระบบ :</p>
+                    <ol class="ps-3">
+                        <li>หลังจากที่ท่านลงทะเบียนเรียบร้อยแล้ว โปรดรอเอกสารอนุมัติของผู้ดูแลระบบ</li>
+                        <li>ท่านจะได้รับอีเมลแจ้งเตือนในอีเมลที่ท่านได้ลงทะเบียนไว้
+                            ในกรณีที่การลงทะเบียนของท่านได้รับการอนุมัติแล้ว
+                        </li>
+                        <li>หลังจากได้รับอีเมลแจ้งเตือนแล้ว โปรดอ่านอีเมลฉบับนั้นให้เข้าใจ
+                        </li>
+                        <li>ท่านสามารถเข้าสู่ระบบเพื่อใช้งานระบบ WiFi ได้ที่ <strong class="text-danger">SSID : IMM_WiFi เท่านั้น</strong>
+                        </li>
+                    </ol>
+                </div>
+                <!-- Changed button to checkbox for agreement -->
+                <div class="mb-3">
+                    <input type="checkbox" id="agreement" name="agreement">
+                    <label for="agreement">อ่านข้อตกลงและวิธีการใช้งาน</label>
+                </div>
+                <button id="registerButton" class="w-100 btn btn-lg btn-primary shadow-lg" type="submit"
+                    disabled>ลงทะเบียน</button>
                 <a href="login.html" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg">ยกเลิก</a>
             </form>
         </div>
@@ -232,7 +274,31 @@
             }
             return "";
         }
+
+        function validateAgreement() {
+            const registerButton = document.getElementById('registerButton');
+            if (registerButton.disabled) {
+                alert('กรุณายอมรับข้อตกลงและเงื่อนไขก่อนที่จะดำเนินการต่อ');
+                return false;
+            }
+            return true;
+        }
+
+        function updateRegisterButton(enabled) {
+            const registerButton = document.getElementById('registerButton');
+            registerButton.disabled = !enabled;
+        }
+
+        // Add event listener to the agreement checkbox
+        document.getElementById('agreement').addEventListener('change', function () {
+            updateRegisterButton(this.checked);
+        });
+
+        // Initial call to set the correct state of the register button
+        updateRegisterButton(false);
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

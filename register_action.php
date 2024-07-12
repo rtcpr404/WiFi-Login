@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['u_img'])) {
             )";
     $objQuery = mysqli_query($objCon, $strSQL) or die(mysqli_error($objCon));
     if ($objQuery) {
-        echo '<script>alert("ลงทะเบียนเรียบร้อยแล้ว");window.location="login.html";</script>';
+        echo '<script>alert("ลงทะเบียนเรียบร้อยแล้ว โปรดรอเเอดมินอนุมัติเพื่อใช้ : IMM_WiFi");window.location="login.html";</script>';
     } else {
         echo '<script>alert("พบข้อผิดพลาด");window.location="register.html";</script>';
     }
