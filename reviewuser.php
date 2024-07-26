@@ -226,7 +226,7 @@ mysqli_close($objCon);
 
                 <?php if ($u_level != 'administrator') : ?>
                 <a href="delete_user.php?u_username=<?php echo $username; ?>" onclick="return confirmDelete();" class="w-100 btn btn-lg btn-danger mt-3 shadow-lg btn-block">ลบผู้ใช้งาน</a>
-                <a href="edit_user.php?u_username=<?php echo $username; ?>" class="w-100 btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a>
+                <!-- <a href="edit_user.php?u_username=<?php echo $username; ?>" class="w-100 btn btn-lg btn-warning mt-3 shadow-lg btn-block">แก้ไขข้อมูล</a> -->
                 <?php endif; ?>
 
                 <a href="admin.php" class="w-100 btn btn-lg btn-success mt-3 shadow-lg btn-block">ไปยัง Approved</a>
